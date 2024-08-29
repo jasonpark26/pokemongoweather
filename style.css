@@ -176,6 +176,132 @@ body{
     opacity: 0;
 }
 
+
+.blankDiv{
+    position: relative;
+    width: 15px;
+    height: 5px;
+    background: #06283D;
+    overflow: hidden;
+    border-radius: 18px;
+    transition: 0.6s ease-out;
+
+}
+
+
+.pokemonContainer{
+    position: relative;
+    width: 500px;
+    height: 105px;
+    background: #fff;
+    padding: 28px 32px;
+    overflow: hidden;
+    border-radius: 18px;
+    font-family: 'Roboto', sans-serif;
+    transition: 0.6s ease-out;
+
+}
+
+.pokemon-box{
+    text-align: center;
+
+}
+
+.pokemon-box img{
+    width: 60%;
+    margin-top: 30px;
+}
+
+/* .pokemon-box .temperature{
+    position: relative;
+    color: #06283D;
+    font-size: 4rem;
+    font-weight: 800;
+    margin-top: 30px;
+    margin-left: -16px;
+}
+
+.pokemon-box .temperature span{
+    position: absolute;
+    margin-left: 4px;
+    font-size: 1.5rem;
+}
+
+.pokemon-box .description{
+    color: #06283D;
+    font-size: 22px;
+    font-weight: 500;
+    text-transform: capitalize;
+} */
+
+.pokemon-details{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.pokemon-details .pname, .pokemon-details .candy{
+    display: flex;
+    align-items: center;
+    width: 50%;
+    height: 100px;
+}
+
+.pokemon-details .pname{
+    padding-left: 20px;
+    justify-content: flex-start;
+}
+
+.pokemon-details .candy{
+    padding-right: 20px;
+    justify-content: flex-end;
+}
+
+.pokemon-details i{
+    color: #06283D;
+    font-size: 26px;
+    margin-right: 10px;
+    margin-top: 6px;
+}
+
+.pokemon-details span{
+    color: #06283D;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.pokemon-details p{
+    color: #06283D;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.pokemon-not-found{
+    width: 100%;
+    text-align: center;
+    margin-top: 100px;
+    scale: 0;
+    opacity: 0;
+    display:none;
+}
+
+.pokemon-not-found img{
+    width: 70%;
+}
+
+.pokemon-not-found p{
+    color: #06283D;
+    font-size: 22px;
+    font-weight: 500;
+    margin-top: 12px;
+}
+
+.pokemon-box, .pokemon-details{
+    scale: 0;
+    opacity: 0;
+}
+
 .fadeIn{
     animation: 0.5s fadeIn forwards;
     animation-delay: 0.5s;

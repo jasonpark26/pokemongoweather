@@ -1,8 +1,40 @@
+
+//import Pokemon from "./pokemon.js";
+//const pokemon = require('./pokemon')
+
 const container = document.querySelector('.container');
 const search = document.querySelector('.search-box button');
 const weatherBox = document.querySelector('.weather-box');
 const weatherDetails = document.querySelector('.weather-details');
 const error404 = document.querySelector('.not-found');
+
+const pokemonContainer = document.querySelector('.pokemonContainer');
+const pokemonDetails = document.querySelector('.pokemon-details');
+const pokemonError404 = document.querySelector('.pokemon-not-found');
+
+ class Pokemon {
+    constructor(name, candy, time, weather) {
+      this.name = name;
+      this.candy = candy;
+      this.time = time;
+      this.weather = weather;
+    }
+  }
+
+
+const tyrunt = new Pokemon('Tyrunt', 50, 'day', 'any');
+const yungoos = new Pokemon('Yungoos', 50, 'day', 'any');
+
+const pokemon = [tyrunt, yungoos];
+
+function getUTCTime (shiftInSeconds) {
+    var currentTimeUTC = Date.now();
+    var shiftedTime = currentTimeUTC + (shiftInSeconds * 1000); // Convert seconds to milliseconds
+    var shiftedDate = new Date(shiftedTime);
+    var localTime = shiftedDate.toLocaleString();
+
+    return localTime;
+}
 
 search.addEventListener('click', () =>{
 
@@ -22,6 +54,12 @@ search.addEventListener('click', () =>{
                 weatherDetails.style.display = 'none';
                 error404.style.display = 'block';
                 error404.classList.add('fadeIn');
+
+                pokemonContainer.style.height = '400px';
+                pokemonDetails.style.display = 'none';
+                pokemonError404.style.display = 'block';
+                pokemonError404.classList.add('fadeIn');
+
                 return;
             }
 
@@ -33,6 +71,10 @@ search.addEventListener('click', () =>{
             const description = document.querySelector('.weather-box .description');
             const humidity = document.querySelector('.weather-details .humidity span');
             const wind = document.querySelector('.weather-details .wind span');
+
+            const pname = document.querySelector('.pokemon-details .pname span ');
+            const candy = document.querySelector('.pokemon-details .candy span ');
+
 
             switch(json.weather[0].main){
                 case 'Clear':
@@ -64,6 +106,22 @@ search.addEventListener('click', () =>{
             humidity.innerHTML = `${(json.main.humidity)}%`;
             wind.innerHTML = `${parseInt(json.wind.speed)}Km/h`;
 
+            var time = '';
+            time = getUTCTime(json.timezone);
+            console.log(time);
+/* 
+            pname.innerHTML = `${tyrunt.name}`;
+            pname.innerHTML += `\n${tyrunt.name}`;
+            candy.innerHTML = `${tyrunt.candy}`;
+ */
+            for (let i = 0; i < pokemon.length; i++) {
+                pname.innerHTML += pokemon[i].name + "<br>";
+                candy.innerHTML += (pokemon[i].candy).toString() + "<br>";
+              }
+            pokemonDetails.classList.add('fadeIn');
+            pokemonContainer.style.height = '590px';
+
+            pokemonDetails.style.display = '';
             weatherBox.style.display = '';
             weatherDetails.style.display = '';
             weatherBox.classList.add('fadeIn');
@@ -78,7 +136,7 @@ search.addEventListener('click', () =>{
 });
 
 
-```
+/* ```
 API Response for Germany
 
 {
@@ -127,4 +185,4 @@ API Response for Germany
     "name": "Germany",
     "cod": 200
 }
-```
+``` */
