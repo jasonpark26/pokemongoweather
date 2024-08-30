@@ -24,16 +24,40 @@ const pokemonError404 = document.querySelector('.pokemon-not-found');
 
 const tyrunt = new Pokemon('Tyrunt', 50, 'day', 'any');
 const yungoos = new Pokemon('Yungoos', 50, 'day', 'any');
+const fomantis = new Pokemon('Fomantis', 50, 'day', 'any');
+const cosmoemD = new Pokemon('Cosmoem (Sol)', 100, 'day', 'any');
+const rockruffD = new Pokemon('Rockruff (Day)', 50, 'day', 'any');
+const eeveeD = new Pokemon('Eevee (Esp)', 25, 'day', 'any');
+const sneasal = new Pokemon('Sneasal (Hisu)', 50, 'day', 'any');
 
-const pokemon = [tyrunt, yungoos];
+const amaura = new Pokemon('Amaura', 50, 'night', 'any');
+const cosmoemN = new Pokemon('Cosmoem (Lun)', 100, 'night', 'any');
+const rockruffN = new Pokemon('Rockruff (Night)', 50, 'night', 'any');
+const eeveeN = new Pokemon('Eevee (Umb)', 25, 'night', 'any');
+
+const sliggoo = new Pokemon('Sliggoo', 100, 'any', 'rain');
+
+
+const pokemon = [tyrunt, yungoos, fomantis, cosmoemD, rockruffD, eeveeD, sneasal,
+                 amaura, cosmoemN, rockruffN, eeveeN, sliggoo];
 
 function getUTCTime (shiftInSeconds) {
-    var currentTimeUTC = Date.now();
-    var shiftedTime = currentTimeUTC + (shiftInSeconds * 1000); // Convert seconds to milliseconds
-    var shiftedDate = new Date(shiftedTime);
-    var localTime = shiftedDate.toLocaleString();
 
-    return localTime;
+    date = new Date()
+    localTime = date.getTime()
+    localOffset = date.getTimezoneOffset() * 60000
+    utc = localTime + localOffset
+    var searchedTime = utc + (1000 * shiftInSeconds)
+    newDate = new Date(searchedTime)
+
+    return newDate;
+}
+
+function isDay (time) {
+    let hour = time.getHours();
+    if (hour >= 8 && hour < 20) {
+        return true;
+    } return false;
 }
 
 search.addEventListener('click', () =>{
@@ -66,6 +90,9 @@ search.addEventListener('click', () =>{
             error404.style.display = 'none';
             error404.classList.remove('fadeIn');
 
+            pokemonError404.style.display = 'none';
+            pokemonError404.classList.remove('fadeIn');
+
             const image = document.querySelector('.weather-box img');
             const temperature = document.querySelector('.weather-box .temperature');
             const description = document.querySelector('.weather-box .description');
@@ -75,6 +102,8 @@ search.addEventListener('click', () =>{
             const pname = document.querySelector('.pokemon-details .pname span ');
             const candy = document.querySelector('.pokemon-details .candy span ');
 
+            pname.innerHTML ='';
+            candy.innerHTML ='';
 
             switch(json.weather[0].main){
                 case 'Clear':
@@ -107,17 +136,32 @@ search.addEventListener('click', () =>{
             wind.innerHTML = `${parseInt(json.wind.speed)}Km/h`;
 
             var time = '';
+            var day = false;
             time = getUTCTime(json.timezone);
-            console.log(time);
-/* 
-            pname.innerHTML = `${tyrunt.name}`;
-            pname.innerHTML += `\n${tyrunt.name}`;
-            candy.innerHTML = `${tyrunt.candy}`;
- */
+            day = isDay(time);
+
+
             for (let i = 0; i < pokemon.length; i++) {
-                pname.innerHTML += pokemon[i].name + "<br>";
-                candy.innerHTML += (pokemon[i].candy).toString() + "<br>";
-              }
+                if (day) {
+                    if (pokemon[i].time == 'day' && pokemon[i].weather == 'any') {
+                        pname.innerHTML += pokemon[i].name + "<br><br>";
+                        candy.innerHTML += (pokemon[i].candy).toString() + "<br><br>";
+                    }
+                } else if (!day) {
+                    if (pokemon[i].time == 'night' && pokemon[i].weather == 'any') {
+                        pname.innerHTML += pokemon[i].name + "<br><br>";
+                        candy.innerHTML += (pokemon[i].candy).toString() + "<br><br>";
+                    }
+                }
+                if (json.weather[0].main == 'Rain') {
+                    if (pokemon[i].weather == 'rain') {
+                        pname.innerHTML += pokemon[i].name + "<br><br>";
+                        candy.innerHTML += (pokemon[i].candy).toString() + "<br><br>";
+                    }
+                }
+            }
+
+
             pokemonDetails.classList.add('fadeIn');
             pokemonContainer.style.height = '590px';
 
@@ -134,55 +178,3 @@ search.addEventListener('click', () =>{
 
 
 });
-
-
-/* ```
-API Response for Germany
-
-{
-    "coord": {
-        "lon": 10.5,
-        "lat": 51.5
-    },
-    "weather": [
-        {
-            "id": 801,
-            "main": "Clouds",
-            "description": "few clouds",
-            "icon": "02d"
-        }
-    ],
-    "base": "stations",
-    "main": {
-        "temp": 14.74,
-        "feels_like": 14.44,
-        "temp_min": 14.74,
-        "temp_max": 14.74,
-        "pressure": 1014,
-        "humidity": 83,
-        "sea_level": 1014,
-        "grnd_level": 979
-    },
-    "visibility": 10000,
-    "wind": {
-        "speed": 7.16,
-        "deg": 286,
-        "gust": 11.63
-    },
-    "clouds": {
-        "all": 12
-    },
-    "dt": 1724223549,
-    "sys": {
-        "type": 2,
-        "id": 197911,
-        "country": "DE",
-        "sunrise": 1724213622,
-        "sunset": 1724264930
-    },
-    "timezone": 7200,
-    "id": 2921044,
-    "name": "Germany",
-    "cod": 200
-}
-``` */

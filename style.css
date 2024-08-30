@@ -212,33 +212,12 @@ body{
     margin-top: 30px;
 }
 
-/* .pokemon-box .temperature{
-    position: relative;
-    color: #06283D;
-    font-size: 4rem;
-    font-weight: 800;
-    margin-top: 30px;
-    margin-left: -16px;
-}
-
-.pokemon-box .temperature span{
-    position: absolute;
-    margin-left: 4px;
-    font-size: 1.5rem;
-}
-
-.pokemon-box .description{
-    color: #06283D;
-    font-size: 22px;
-    font-weight: 500;
-    text-transform: capitalize;
-} */
-
 .pokemon-details{
+    position: center;
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-top: 30px;
+    margin-top: 225px;
 }
 
 .pokemon-details .pname, .pokemon-details .candy{
@@ -267,7 +246,7 @@ body{
 
 .pokemon-details span{
     color: #06283D;
-    font-size: 22px;
+    font-size: 15px;
     font-weight: 500;
 }
 
