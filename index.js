@@ -96,6 +96,8 @@ search.addEventListener('click', () =>{
             const image = document.querySelector('.weather-box img');
             const temperature = document.querySelector('.weather-box .temperature');
             const description = document.querySelector('.weather-box .description');
+            const time = document.querySelector('.weather-box .time');
+
             const humidity = document.querySelector('.weather-details .humidity span');
             const wind = document.querySelector('.weather-details .wind span');
 
@@ -130,15 +132,18 @@ search.addEventListener('click', () =>{
                     image.src = '';
             }
 
+
+            var localTime = '';
+            var day = false;
+            localTime = getUTCTime(json.timezone);
+            day = isDay(localTime);
+
             temperature.innerHTML = `${parseInt(json.main.temp)}<span>°C</span>`;
             description.innerHTML = `${(json.weather[0].description)}`;
+            time.innerHTML = `Local Time: <br> ${localTime.toLocaleTimeString()}`;
             humidity.innerHTML = `${(json.main.humidity)}%`;
             wind.innerHTML = `${parseInt(json.wind.speed)}Km/h`;
 
-            var time = '';
-            var day = false;
-            time = getUTCTime(json.timezone);
-            day = isDay(time);
 
 
             for (let i = 0; i < pokemon.length; i++) {

@@ -108,18 +108,25 @@ body{
     text-transform: capitalize;
 }
 
+.weather-box .time{
+    color: #06283D;
+    font-size: 22px;
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
 .weather-details{
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-top: 30px;
+    margin-top: 25px;
 }
 
 .weather-details .humidity, .weather-details .wind{
     display: flex;
     align-items: center;
     width: 50%;
-    height: 100px;
+    height: 50px;
 }
 
 .weather-details .humidity{
