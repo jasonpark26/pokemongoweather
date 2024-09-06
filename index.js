@@ -168,14 +168,14 @@ search.addEventListener('click', () =>{
 
 
             pokemonDetails.classList.add('fadeIn');
-            pokemonContainer.style.height = '590px';
+            pokemonContainer.style.height = '620px';
 
             pokemonDetails.style.display = '';
             weatherBox.style.display = '';
             weatherDetails.style.display = '';
             weatherBox.classList.add('fadeIn');
             weatherDetails.classList.add('fadeIn');
-            container.style.height = '590px';
+            container.style.height = '620px';
 
 
 
